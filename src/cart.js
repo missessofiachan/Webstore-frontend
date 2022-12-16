@@ -43,12 +43,6 @@ const generateCartItems = () => {
       .join(''))
   } else {
     ShoppingCart.innerHTML = ''
-    label.innerHTML = `
-    <h2>Cart is Empty</h2>
-    <a href="index.html">
-      <button class="HomeBtn btn-lg btn btn-primary">Back to home</button>
-    </a>
-    `
   }
 }
 
@@ -88,7 +82,6 @@ const decrement = (id) => {
 
 const update = (id) => {
   const search = basket.find((x) => x.id === id)
-  // console.log(search.item);
   document.getElementById(id).innerHTML = search.item
   calculation()
   TotalAmount()
@@ -96,7 +89,6 @@ const update = (id) => {
 
 const removeItem = (id) => {
   const selectedItem = id
-  // console.log(selectedItem.id);
   basket = basket.filter((x) => x.id !== selectedItem.id)
   generateCartItems()
   TotalAmount()
@@ -107,6 +99,15 @@ const clearCart = () => {
   basket = []
   generateCartItems()
   localStorage.setItem('data', JSON.stringify(basket))
+  location.reload()
+}
+
+const checkout = () => {
+  basket = []
+  generateCartItems()
+  localStorage.setItem('data', JSON.stringify(basket))
+  location.reload()
+  alert('Thank you for shopping with us')
 }
 
 const TotalAmount = () => {
@@ -118,11 +119,11 @@ const TotalAmount = () => {
         return item * search.price
       })
       .reduce((x, y) => x + y, 0)
-    // console.log(amount);
-    label.innerHTML = `
-    <h2>Total Bill : $ ${amount}</h2>
-    <button  class="btn btn-lg btn-primary" type="submit" class="checkout">Checkout</button>
 
+    label.innerHTML = `
+        <hr class="my-4">
+    <h2>Total Bill : $ ${amount}</h2>
+    <button   class="btn btn-lg btn-primary" type="submit" class="checkout">Checkout</button>
     <button onclick="clearCart()" class=" btn-lg removeAll btn btn-danger">Clear Cart</button>
     `
   } else return
