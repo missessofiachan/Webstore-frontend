@@ -71,9 +71,15 @@ a {
   grid-template-columns: repeat(1, 320px);
   justify-content: center;
   gap: 15px;
+
 }
 #bag-icon {
   position: relative;
   font-size: 30px;
   color: #fff;
+}
+
+#dice {
+  position: relative;
+  font-size: 30px;
 }
